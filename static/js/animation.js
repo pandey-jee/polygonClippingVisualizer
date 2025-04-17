@@ -79,13 +79,44 @@ class AnimationController {
     // Create a new timeline
     this.timeline = gsap.timeline({
       onComplete: () => {
-        // Show final result
-        const resultPolygon = this.clipper.getStep(totalSteps - 1).outputPolygon;
+        // Get the final result from the clipper
+        console.log('Animation complete, getting final result');
+        
+        // Check if we have steps
+        if (totalSteps === 0) {
+          console.error('No clipping steps generated, something went wrong');
+          this.updateStepIndicator('Error: No clipping result available');
+          return;
+        }
+        
+        // Access the last step's output
+        const lastStep = this.clipper.getStep(totalSteps - 1);
+        console.log('Last step:', lastStep);
+        
+        if (!lastStep || !lastStep.outputPolygon) {
+          console.error('Invalid last step or missing output polygon');
+          this.updateStepIndicator('Error: Invalid clipping result');
+          return;
+        }
+        
+        // Get the result polygon from the last step
+        const resultPolygon = lastStep.outputPolygon;
+        console.log('Final result polygon:', resultPolygon);
+        
+        // Check if we have a valid result
+        if (!resultPolygon || resultPolygon.length < 3) {
+          console.log('Result polygon is empty or invalid (less than 3 points)');
+          this.updateStepIndicator('No intersection between polygons');
+          return;
+        }
+        
+        // Set the result polygon on the canvas
         this.canvasManager.setResultPolygon(resultPolygon);
         this.updateStepIndicator('Clipping complete! Final result polygon displayed');
         
         // Add a small delay and then highlight the result again
         setTimeout(() => {
+          console.log('Highlighting final result');
           // Show a more dramatic final result
           this.canvasManager.drawHighlightedResult();
           
@@ -173,7 +204,41 @@ class AnimationController {
     const step = this.clipper.getNextStep();
     if (!step) {
       // End of steps reached
-      const resultPolygon = this.clipper.getStep(this.clipper.getTotalSteps() - 1).outputPolygon;
+      console.log('Step-by-step mode: End of steps reached');
+      
+      const totalSteps = this.clipper.getTotalSteps();
+      
+      // Check if we have steps
+      if (totalSteps === 0) {
+        console.error('No clipping steps available in step-by-step mode');
+        this.updateStepIndicator('Error: No clipping result available');
+        document.getElementById('nextStep').disabled = true;
+        return;
+      }
+      
+      // Access the last step
+      const lastStep = this.clipper.getStep(totalSteps - 1);
+      console.log('Last step in step-by-step mode:', lastStep);
+      
+      if (!lastStep || !lastStep.outputPolygon) {
+        console.error('Invalid last step or missing output polygon in step-by-step mode');
+        this.updateStepIndicator('Error: Invalid clipping result');
+        document.getElementById('nextStep').disabled = true;
+        return;
+      }
+      
+      // Set the result polygon
+      const resultPolygon = lastStep.outputPolygon;
+      console.log('Final result polygon in step-by-step mode:', resultPolygon);
+      
+      // Check if we have a valid result
+      if (!resultPolygon || resultPolygon.length < 3) {
+        console.log('Result polygon is empty or invalid in step-by-step mode');
+        this.updateStepIndicator('No intersection between polygons');
+        document.getElementById('nextStep').disabled = true;
+        return;
+      }
+      
       this.canvasManager.setResultPolygon(resultPolygon);
       this.updateStepIndicator('Clipping complete! Final result polygon displayed');
       document.getElementById('nextStep').disabled = true;
