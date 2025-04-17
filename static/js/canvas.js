@@ -20,15 +20,15 @@ class CanvasManager {
     this.snapToFirstDistance = 20; // Distance to snap to first point to close the polygon
     
     this.colors = {
-      subject: 'rgba(0, 204, 204, 0.7)',      // Main teal
-      clipping: 'rgba(51, 255, 255, 0.7)',    // Lighter teal
-      result: 'rgba(0, 139, 139, 0.9)',       // Darker teal
-      resultStroke: 'rgba(0, 139, 139, 1)',   // Solid teal for stroke
-      resultGlow: 'rgba(0, 204, 204, 1)',     // Glow color
-      background: 'rgba(10, 26, 31, 1)',      // Dark teal background
-      grid: 'rgba(0, 69, 74, 0.2)',           // Subtle grid lines
+      subject: 'rgba(0, 128, 255, 0.7)',      // Blue for subject polygon
+      clipping: 'rgba(255, 128, 0, 0.7)',     // Orange for clipping window
+      result: 'rgba(0, 204, 0, 0.9)',         // Green for result
+      resultStroke: 'rgba(0, 204, 0, 1)',     // Solid green for result stroke
+      resultGlow: 'rgba(0, 204, 0, 1)',       // Green glow
+      background: 'rgba(16, 24, 32, 1)',      // Dark background
+      grid: 'rgba(50, 60, 70, 0.2)',          // Subtle grid lines
       pointHighlight: 'rgba(255, 255, 255, 0.9)',
-      edgeHighlight: 'rgba(0, 255, 255, 0.9)'  // Bright teal for edge highlight
+      edgeHighlight: 'rgba(255, 255, 0, 0.9)' // Yellow for edge highlight
     };
     
     this.resize();
@@ -511,11 +511,31 @@ class CanvasManager {
     // Create a highlight animation for the result
     this.drawHighlightedResult();
     
-    // Switch to the result tab to show the coordinates
+    // Manually show the result tab content
+    // First, hide all tabs and remove active class
+    const tabs = document.querySelectorAll('.tab');
+    const dataPanels = document.querySelectorAll('.data-panel');
+    
+    tabs.forEach(t => t.classList.remove('active'));
+    dataPanels.forEach(panel => panel.classList.remove('active'));
+    
+    // Then activate the result tab and its panel
     const resultTab = document.querySelector('[data-tab="result"]');
+    const resultPanel = document.getElementById('result-data');
+    
     if (resultTab) {
-      resultTab.click();
+      resultTab.classList.add('active');
     }
+    
+    if (resultPanel) {
+      resultPanel.classList.add('active');
+    }
+    
+    // Make sure the result coordinates are properly filled
+    this.updateCoordinateDisplay();
+    
+    // Log for debugging
+    console.log('Result polygon set:', this.resultPolygon.length, 'points');
   }
   
   /**

@@ -312,32 +312,34 @@ input:checked + .slider:before {
 /* Tabs */
 .data-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(0, 204, 204, 0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 15px;
 }
 
 .tab {
-  padding: 8px 15px;
-  font-size: 0.9rem;
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: var(--text-secondary);
-  border-bottom: 2px solid transparent;
+  color: #a0a0a0;
+  border-bottom: 3px solid transparent;
+  font-weight: bold;
 }
 
 .tab:hover {
-  color: var(--text-primary);
+  color: #ffffff;
 }
 
 .tab.active {
-  color: var(--accent-light);
-  border-bottom: 2px solid var(--accent-light);
+  color: #ffffff;
+  border-bottom: 3px solid #00cc00;
+  background-color: rgba(0, 204, 0, 0.1);
 }
 
 /* Data Panels */
 .data-content {
   position: relative;
-  min-height: 100px;
+  min-height: 150px;
 }
 
 .data-panel {
@@ -347,33 +349,50 @@ input:checked + .slider:before {
 
 .data-panel.active {
   display: block;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
 }
 
 .coordinates-list {
-  max-height: 120px;
+  max-height: 150px;
   overflow-y: auto;
   background: rgba(0, 0, 0, 0.2);
   border-radius: 5px;
-  padding: 10px;
-  font-size: 0.8rem;
+  padding: 15px;
+  font-size: 0.9rem;
 }
 
 .coordinate-item {
   display: flex;
   justify-content: space-between;
-  padding: 3px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 5px;
 }
 
 .coordinate-item:last-child {
   border-bottom: none;
+  margin-bottom: 0;
 }
 
 .empty-state {
-  color: var(--text-secondary);
+  color: #a0a0a0;
   font-style: italic;
   text-align: center;
-  padding: 15px 0;
+  padding: 20px 0;
+  font-size: 1rem;
+}
+
+/* Specific styling for result coordinates panel */
+#result-data .coordinates-list {
+  background-color: rgba(0, 204, 0, 0.1);
+  border: 1px solid rgba(0, 204, 0, 0.3);
+}
+
+#result-data .coordinate-item {
+  color: #ffffff;
+  font-weight: bold;
 }
 
 /* Algorithm Info */
