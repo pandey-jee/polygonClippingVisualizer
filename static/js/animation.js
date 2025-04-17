@@ -82,7 +82,12 @@ class AnimationController {
         // Show final result
         const resultPolygon = this.clipper.getStep(totalSteps - 1).outputPolygon;
         this.canvasManager.setResultPolygon(resultPolygon);
-        this.updateStepIndicator('Clipping complete!');
+        this.updateStepIndicator('Clipping complete! Result polygon displayed');
+        
+        // Add a small delay and then highlight the result again
+        setTimeout(() => {
+          this.canvasManager.drawHighlightedResult();
+        }, 500);
       }
     });
     
@@ -145,8 +150,15 @@ class AnimationController {
     const step = this.clipper.getNextStep();
     if (!step) {
       // End of steps reached
-      this.updateStepIndicator('Clipping complete!');
+      const resultPolygon = this.clipper.getStep(this.clipper.getTotalSteps() - 1).outputPolygon;
+      this.canvasManager.setResultPolygon(resultPolygon);
+      this.updateStepIndicator('Clipping complete! Result polygon displayed');
       document.getElementById('nextStep').disabled = true;
+      
+      // Highlight the result with a small delay
+      setTimeout(() => {
+        this.canvasManager.drawHighlightedResult();
+      }, 500);
       return;
     }
     

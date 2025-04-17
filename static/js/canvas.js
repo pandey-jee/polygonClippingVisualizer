@@ -22,7 +22,9 @@ class CanvasManager {
     this.colors = {
       subject: 'rgba(0, 255, 255, 0.7)',
       clipping: 'rgba(255, 255, 0, 0.7)',
-      result: 'rgba(0, 255, 127, 0.7)',
+      result: 'rgba(0, 255, 127, 0.9)', // More opaque green
+      resultStroke: 'rgba(0, 255, 127, 1)', // Solid green for stroke
+      resultGlow: 'rgba(0, 255, 127, 1)', // Glow color
       background: 'rgba(18, 24, 36, 1)',
       grid: 'rgba(50, 60, 80, 0.3)',
       pointHighlight: 'rgba(255, 255, 255, 0.9)',
@@ -311,7 +313,17 @@ class CanvasManager {
     
     // Draw the result polygon if available
     if (this.resultPolygon.length > 2) {
-      this.drawPolygon(this.resultPolygon, this.colors.result);
+      // Draw with thicker line and glow effect
+      this.ctx.save();
+      this.ctx.shadowColor = this.colors.resultGlow;
+      this.ctx.shadowBlur = 10;
+      this.drawPolygon(this.resultPolygon, this.colors.result, true, 3);
+      this.ctx.restore();
+      
+      // Draw points for the result
+      this.resultPolygon.forEach(point => {
+        this.drawPoint(point, this.colors.resultStroke, 6);
+      });
     }
     
     // Draw the subject polygon
@@ -495,6 +507,62 @@ class CanvasManager {
   setResultPolygon(resultPolygon) {
     this.resultPolygon = resultPolygon;
     this.updateCoordinateDisplay();
+    
+    // Create a highlight animation for the result
+    this.drawHighlightedResult();
+    
+    // Switch to the result tab to show the coordinates
+    const resultTab = document.querySelector('[data-tab="result"]');
+    if (resultTab) {
+      resultTab.click();
+    }
+  }
+  
+  /**
+   * Draw a highlighted animation for the result polygon
+   */
+  drawHighlightedResult() {
+    // First do a normal render
     this.render();
+    
+    // Ensure we have a result to highlight
+    if (!this.resultPolygon || this.resultPolygon.length < 3) return;
+    
+    // Create a pulsing animation to highlight the result
+    const pulseAnimation = () => {
+      // Highlight just the result with a bright glow
+      this.ctx.save();
+      this.ctx.shadowColor = this.colors.result;
+      this.ctx.shadowBlur = 15;
+      this.drawPolygon(this.resultPolygon, this.colors.result, true, 3);
+      
+      // Draw points with larger radius
+      this.resultPolygon.forEach(point => {
+        this.drawPoint(point, this.colors.result, 7);
+      });
+      this.ctx.restore();
+    };
+    
+    // Pulse the result a few times to make it stand out
+    pulseAnimation();
+    
+    // Add a text label showing "RESULT"
+    if (this.resultPolygon.length > 0) {
+      // Calculate center of result polygon
+      let centerX = 0, centerY = 0;
+      this.resultPolygon.forEach(point => {
+        centerX += point.x;
+        centerY += point.y;
+      });
+      centerX /= this.resultPolygon.length;
+      centerY /= this.resultPolygon.length;
+      
+      // Draw label
+      this.ctx.font = 'bold 16px Arial';
+      this.ctx.fillStyle = this.colors.result;
+      this.ctx.textAlign = 'center';
+      this.ctx.textBaseline = 'middle';
+      this.ctx.fillText('RESULT', centerX, centerY);
+    }
   }
 }
