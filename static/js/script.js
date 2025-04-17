@@ -6,6 +6,9 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Debug logging
+  console.log('DOM content loaded, initializing application...');
+  
   // Initialize the canvas manager
   const canvasManager = new CanvasManager('clipCanvas');
   
@@ -40,12 +43,18 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   
   // Button event listeners
+  console.log('Setting up button event listeners');
+  console.log('Draw Subject button:', drawSubjectBtn);
+  console.log('Draw Clipping button:', drawClippingBtn);
+  
   drawSubjectBtn.addEventListener('click', () => {
+    console.log('Draw Subject button clicked');
     canvasManager.startDrawingPolygon('subject');
     updateButtonState('drawingSubject');
   });
   
   drawClippingBtn.addEventListener('click', () => {
+    console.log('Draw Clipping button clicked');
     canvasManager.startDrawingPolygon('clipping');
     updateButtonState('drawingClipping');
   });
@@ -173,4 +182,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   
   animateCanvasBorder();
+  
+  // Initialize default button state
+  console.log('Setting initial button state to default');
+  updateButtonState('default');
+  
+  // Force enable the buttons if they're still disabled
+  setTimeout(() => {
+    console.log('Force enabling buttons after timeout');
+    drawSubjectBtn.disabled = false;
+    drawClippingBtn.disabled = false;
+  }, 1000);
 });

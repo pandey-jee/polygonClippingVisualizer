@@ -90,12 +90,15 @@ class CanvasManager {
    * @param {String} polygonType - "subject" or "clipping"
    */
   startDrawingPolygon(polygonType) {
+    console.log(`Starting to draw ${polygonType} polygon`);
     this.selectedPolygon = polygonType;
     this.isDrawing = true;
     
     if (polygonType === 'subject') {
+      console.log('Resetting subject polygon array');
       this.subjectPolygon = [];
     } else if (polygonType === 'clipping') {
+      console.log('Resetting clipping polygon array');
       this.clippingPolygon = [];
     }
     
@@ -104,6 +107,8 @@ class CanvasManager {
     document.getElementById('runClipping').disabled = true;
     this.updateCoordinateDisplay();
     this.render();
+    
+    console.log(`Drawing mode active: ${this.isDrawing}, selected polygon: ${this.selectedPolygon}`);
   }
   
   /**
@@ -196,11 +201,15 @@ class CanvasManager {
    * Set up mouse and touch event listeners
    */
   setupEventListeners() {
+    console.log('Setting up canvas event listeners');
+    
     // Mouse events
     this.canvas.addEventListener('mousedown', (e) => {
+      console.log('Canvas mousedown event triggered');
       const rect = this.canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
+      console.log(`Adding point at (${x}, ${y})`);
       this.addPoint(x, y);
     });
     
@@ -216,11 +225,13 @@ class CanvasManager {
     
     // Touch events
     this.canvas.addEventListener('touchstart', (e) => {
+      console.log('Canvas touchstart event triggered');
       e.preventDefault();
       const rect = this.canvas.getBoundingClientRect();
       const touch = e.touches[0];
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
+      console.log(`Adding touch point at (${x}, ${y})`);
       this.addPoint(x, y);
     });
     
@@ -228,6 +239,8 @@ class CanvasManager {
     window.addEventListener('resize', () => {
       this.resize();
     });
+    
+    console.log('Canvas event listeners setup complete');
   }
   
   /**
