@@ -222,6 +222,8 @@ canvas {
   letter-spacing: 1px;
   position: relative;
   overflow: hidden;
+  opacity: 1 !important; /* Ensure buttons are always visible */
+  transform: translateY(0) !important; /* Prevent buttons from being moved off-screen */
 }
 
 .neon-button:before {

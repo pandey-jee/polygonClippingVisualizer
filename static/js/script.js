@@ -157,14 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
       ease: 'power2.out'
     });
     
-    // Button staggered animation
-    gsap.from('.neon-button', {
-      opacity: 0,
-      y: 20,
-      stagger: 0.1,
-      duration: 0.5,
-      delay: 0.5,
-      ease: 'back.out'
+    // Make sure all buttons are fully visible and don't animate them
+    document.querySelectorAll('.neon-button').forEach(button => {
+      button.style.opacity = '1';
+      button.style.transform = 'translateY(0)';
+      button.style.visibility = 'visible';
+      button.style.display = 'block';
     });
   }
   
