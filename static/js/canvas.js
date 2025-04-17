@@ -458,10 +458,16 @@ class CanvasManager {
     const subjectCoordinatesEl = document.getElementById('subject-coordinates');
     if (this.subjectPolygon.length > 0) {
       let html = '';
+      if (this.subjectPolygon.length >= 3) {
+        html += `<div class="coordinate-header">
+          <strong>Subject Polygon: ${this.subjectPolygon.length} points</strong>
+        </div>`;
+      }
+      
       this.subjectPolygon.forEach((point, index) => {
         html += `<div class="coordinate-item">
           <span>Point ${index + 1}</span>
-          <span>(${Math.round(point.x)}, ${Math.round(point.y)})</span>
+          <span>(${point.x.toFixed(2)}, ${point.y.toFixed(2)})</span>
         </div>`;
       });
       subjectCoordinatesEl.innerHTML = html;
@@ -473,10 +479,16 @@ class CanvasManager {
     const clippingCoordinatesEl = document.getElementById('clipping-coordinates');
     if (this.clippingPolygon.length > 0) {
       let html = '';
+      if (this.clippingPolygon.length >= 3) {
+        html += `<div class="coordinate-header">
+          <strong>Clipping Polygon: ${this.clippingPolygon.length} points</strong>
+        </div>`;
+      }
+      
       this.clippingPolygon.forEach((point, index) => {
         html += `<div class="coordinate-item">
           <span>Point ${index + 1}</span>
-          <span>(${Math.round(point.x)}, ${Math.round(point.y)})</span>
+          <span>(${point.x.toFixed(2)}, ${point.y.toFixed(2)})</span>
         </div>`;
       });
       clippingCoordinatesEl.innerHTML = html;
@@ -486,18 +498,33 @@ class CanvasManager {
     
     // Update result polygon coordinates
     const resultCoordinatesEl = document.getElementById('result-coordinates');
-    if (this.resultPolygon.length > 0) {
+    if (this.resultPolygon && this.resultPolygon.length > 0) {
       let html = '';
-      this.resultPolygon.forEach((point, index) => {
-        html += `<div class="coordinate-item">
-          <span>Point ${index + 1}</span>
-          <span>(${Math.round(point.x)}, ${Math.round(point.y)})</span>
+      
+      if (this.resultPolygon.length >= 3) {
+        html += `<div class="coordinate-header">
+          <strong>Result Polygon: ${this.resultPolygon.length} points</strong>
         </div>`;
-      });
+      
+        this.resultPolygon.forEach((point, index) => {
+          html += `<div class="coordinate-item">
+            <span>Point ${index + 1}</span>
+            <span>(${point.x.toFixed(2)}, ${point.y.toFixed(2)})</span>
+          </div>`;
+        });
+      } else {
+        html = '<p class="empty-state warning">No valid clipping result (need at least 3 points)</p>';
+      }
+      
       resultCoordinatesEl.innerHTML = html;
     } else {
       resultCoordinatesEl.innerHTML = '<p class="empty-state">Run clipping to see result coordinates</p>';
     }
+    
+    // Log for debugging
+    console.log('Coordinate display updated: subject=', this.subjectPolygon.length, 
+                'clipping=', this.clippingPolygon.length, 
+                'result=', this.resultPolygon ? this.resultPolygon.length : 0);
   }
   
   /**

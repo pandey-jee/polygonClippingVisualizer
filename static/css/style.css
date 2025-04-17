@@ -384,6 +384,25 @@ input:checked + .slider:before {
   font-size: 1rem;
 }
 
+.empty-state.warning {
+  color: #ffcc00;
+  font-weight: bold;
+  border: 1px dashed #ffcc00;
+  border-radius: 5px;
+  background-color: rgba(255, 204, 0, 0.1);
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.coordinate-header {
+  padding: 10px;
+  background: var(--bg-tertiary);
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
 /* Specific styling for result coordinates panel */
 #result-data .coordinates-list {
   background-color: rgba(0, 204, 0, 0.1);
