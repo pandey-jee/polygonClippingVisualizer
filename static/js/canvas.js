@@ -546,9 +546,7 @@ class CanvasManager {
     this.clear();
     this.drawGrid();
     
-    // Ensure we have a result to highlight
-    if (!this.resultPolygon || this.resultPolygon.length < 3) return;
-    
+    // ALWAYS draw the original polygons so user can see them
     // Draw original polygons with reduced opacity
     this.ctx.globalAlpha = 0.3;
     if (this.subjectPolygon.length > 2) {
@@ -558,6 +556,34 @@ class CanvasManager {
       this.drawPolygon(this.clippingPolygon, this.colors.clipping, true, 1);
     }
     this.ctx.globalAlpha = 1.0;
+    
+    // Ensure we have a result to highlight
+    if (!this.resultPolygon || this.resultPolygon.length < 3) {
+      // If no valid result, show a "No Intersection" message
+      this.ctx.font = 'bold 24px Arial';
+      this.ctx.textAlign = 'center';
+      this.ctx.textBaseline = 'middle';
+      
+      // Draw shadow first for better visibility
+      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.fillText('NO INTERSECTION FOUND', this.canvas.width/2 + 2, this.canvas.height/2 + 2);
+      
+      // Draw main text
+      this.ctx.fillStyle = '#FF6666';
+      this.ctx.fillText('NO INTERSECTION FOUND', this.canvas.width/2, this.canvas.height/2);
+      
+      // Also draw a red X over the canvas
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = 'rgba(255, 0, 0, 0.3)';
+      this.ctx.lineWidth = 5;
+      this.ctx.moveTo(50, 50);
+      this.ctx.lineTo(this.canvas.width - 50, this.canvas.height - 50);
+      this.ctx.moveTo(this.canvas.width - 50, 50);
+      this.ctx.lineTo(50, this.canvas.height - 50);
+      this.ctx.stroke();
+      
+      return;
+    }
     
     // Draw the result with enhanced appearance
     this.ctx.save();
@@ -576,29 +602,26 @@ class CanvasManager {
     });
     this.ctx.restore();
     
-    // Add a prominent "FINAL RESULT" text label
-    if (this.resultPolygon.length > 0) {
-      // Calculate center of result polygon
-      let centerX = 0, centerY = 0;
-      this.resultPolygon.forEach(point => {
-        centerX += point.x;
-        centerY += point.y;
-      });
-      centerX /= this.resultPolygon.length;
-      centerY /= this.resultPolygon.length;
-      
-      // Draw text shadow for better visibility
-      this.ctx.font = 'bold 20px Arial';
-      this.ctx.textAlign = 'center';
-      this.ctx.textBaseline = 'middle';
-      
-      // Draw shadow first
-      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-      this.ctx.fillText('FINAL RESULT', centerX + 2, centerY + 2);
-      
-      // Draw main text
-      this.ctx.fillStyle = '#FFFFFF';
-      this.ctx.fillText('FINAL RESULT', centerX, centerY);
-    }
+    // Calculate center of result polygon
+    let centerX = 0, centerY = 0;
+    this.resultPolygon.forEach(point => {
+      centerX += point.x;
+      centerY += point.y;
+    });
+    centerX /= this.resultPolygon.length;
+    centerY /= this.resultPolygon.length;
+    
+    // Draw text shadow for better visibility
+    this.ctx.font = 'bold 20px Arial';
+    this.ctx.textAlign = 'center';
+    this.ctx.textBaseline = 'middle';
+    
+    // Draw shadow first
+    this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+    this.ctx.fillText('FINAL RESULT', centerX + 2, centerY + 2);
+    
+    // Draw main text
+    this.ctx.fillStyle = '#FFFFFF';
+    this.ctx.fillText('FINAL RESULT', centerX, centerY);
   }
 }

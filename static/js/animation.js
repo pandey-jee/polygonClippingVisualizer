@@ -79,10 +79,22 @@ class AnimationController {
     // Create a new timeline
     this.timeline = gsap.timeline({
       onComplete: () => {
-        // Show final result
+        // Get the final result polygon
         const resultPolygon = this.clipper.getStep(totalSteps - 1).outputPolygon;
-        this.canvasManager.setResultPolygon(resultPolygon);
-        this.updateStepIndicator('Clipping complete! Final result polygon displayed');
+        
+        // Debug logs to track the result
+        console.log('Final clipped polygon:', resultPolygon);
+        console.log('Total steps:', totalSteps);
+        console.log('Last step index:', totalSteps - 1);
+        
+        if (resultPolygon && resultPolygon.length > 0) {
+          this.updateStepIndicator(`Clipping complete! Result has ${resultPolygon.length} points`);
+        } else {
+          this.updateStepIndicator('No intersection found between polygons');
+        }
+        
+        // Make sure to display even if empty (will show message)
+        this.canvasManager.setResultPolygon(resultPolygon || []);
         
         // Add a small delay and then highlight the result again
         setTimeout(() => {
