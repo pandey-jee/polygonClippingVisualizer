@@ -505,30 +505,11 @@ class CanvasManager {
    * @param {Array} resultPolygon - The clipped polygon result
    */
   setResultPolygon(resultPolygon) {
-    console.log('Setting result polygon:', resultPolygon);
-    
-    // Ensure we have a proper array to work with
-    if (!resultPolygon) {
-      console.error('Null or undefined result polygon passed to setResultPolygon');
-      this.resultPolygon = [];
-      this.updateCoordinateDisplay();
-      return;
-    }
-    
-    // Copy the result polygon to avoid reference issues
-    this.resultPolygon = JSON.parse(JSON.stringify(resultPolygon));
-    
-    // Check if we have a valid polygon result (at least 3 points)
-    if (this.resultPolygon.length < 3) {
-      console.log('Result polygon has less than 3 points:', this.resultPolygon.length);
-    } else {
-      console.log('Valid result polygon with', this.resultPolygon.length, 'points');
-      // Create a highlight animation for the result
-      this.drawHighlightedResult();
-    }
-    
-    // Update coordinates display regardless of result validity
+    this.resultPolygon = resultPolygon;
     this.updateCoordinateDisplay();
+    
+    // Create a highlight animation for the result
+    this.drawHighlightedResult();
     
     // Switch to the result tab to show the coordinates
     const resultTab = document.querySelector('[data-tab="result"]');

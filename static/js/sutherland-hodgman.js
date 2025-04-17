@@ -19,28 +19,8 @@ class SutherlandHodgman {
    * @returns {Boolean} - True if inside, false if outside
    */
   isInside(point, clipEdgeStart, clipEdgeEnd) {
-    // Correct implementation of the inside test for Sutherland-Hodgman
-    // Returns true if the point is on the inside of the edge
-    // The inside is determined by the right-hand side of the edge when going from start to end
-    
-    // Vector from edge start to edge end
-    const edgeX = clipEdgeEnd.x - clipEdgeStart.x;
-    const edgeY = clipEdgeEnd.y - clipEdgeStart.y;
-    
-    // Vector from edge start to the point
-    const pointX = point.x - clipEdgeStart.x;
-    const pointY = point.y - clipEdgeStart.y;
-    
-    // Cross product to determine if point is to the right of the edge
-    const crossProduct = (edgeX * pointY) - (edgeY * pointX);
-    
-    // If the cross product is negative, the point is on the right side of the edge
-    // This is equivalent to a counter-clockwise polygon with the point inside
-    const result = crossProduct <= 0;
-    
-    console.log(`isInside check: point (${point.x},${point.y}), edge (${clipEdgeStart.x},${clipEdgeStart.y}) to (${clipEdgeEnd.x},${clipEdgeEnd.y}), result: ${result}`);
-    
-    return result;
+    return (clipEdgeEnd.x - clipEdgeStart.x) * (point.y - clipEdgeStart.y) - 
+           (clipEdgeEnd.y - clipEdgeStart.y) * (point.x - clipEdgeStart.x) <= 0;
   }
   
   /**
@@ -201,30 +181,21 @@ class SutherlandHodgman {
     this.steps = [];
     this.currentStepIndex = -1;
     
-    console.log('Starting clipping algorithm');
-    console.log('Subject polygon:', JSON.stringify(subjectPolygon));
-    console.log('Clipping polygon:', JSON.stringify(clipPolygon));
-    
     // Handle edge cases
     if (subjectPolygon.length < 3 || clipPolygon.length < 3) {
-      console.log('One of the polygons has less than 3 points, returning empty result');
       return [];
     }
     
     let outputList = [...subjectPolygon];
-    console.log('Initial output list:', JSON.stringify(outputList));
     
     // For each edge in the clipper polygon
     for (let i = 0; i < clipPolygon.length; i++) {
       const start = clipPolygon[i];
       const end = clipPolygon[(i + 1) % clipPolygon.length];
       
-      console.log(`Clipping against edge ${i}: (${start.x},${start.y}) to (${end.x},${end.y})`);
       outputList = this.clipAgainstEdge(outputList, start, end);
-      console.log(`Result after edge ${i}:`, JSON.stringify(outputList));
     }
     
-    console.log('Final clipped result:', JSON.stringify(outputList));
     return outputList;
   }
   
