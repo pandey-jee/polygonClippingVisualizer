@@ -1,26 +1,26 @@
 /* Base Styles and Variables */
 :root {
-  /* Unified Color Theme - Purple Glow */
-  --bg-primary: #0e0e18;
-  --bg-secondary: #161628;
-  --bg-tertiary: #1f1f36;
-  --text-primary: #f0f0ff;
-  --text-secondary: #a0a0cc;
+  /* Unified Color Theme - Teal Blue Glow */
+  --bg-primary: #0a1a1f;
+  --bg-secondary: #0d2229;
+  --bg-tertiary: #0e313c;
+  --text-primary: #e6f7ff;
+  --text-secondary: #a9d7e6;
   
   /* Single accent color with variations */
-  --accent-primary: #9d4edd; /* Main purple */
-  --accent-light: #c77dff;   /* Lighter purple */
-  --accent-dark: #7b2cbf;    /* Darker purple */
-  --accent-secondary: #5a189a; /* Very dark purple */
+  --accent-primary: #00cccc; /* Main teal */
+  --accent-light: #33ffff;   /* Lighter teal */
+  --accent-dark: #008b8b;    /* Darker teal */
+  --accent-secondary: #00454a; /* Very dark teal */
   
-  /* Polygon colors - all purple shades */
-  --color-subject: #9d4edd;    /* Main purple */
-  --color-clipping: #c77dff;   /* Lighter purple */
-  --color-result: #7b2cbf;     /* Darker purple */
+  /* Polygon colors - all teal shades */
+  --color-subject: #00cccc;    /* Main teal */
+  --color-clipping: #33ffff;   /* Lighter teal */
+  --color-result: #008b8b;     /* Darker teal */
   
   /* Glow Effects */
-  --glow-primary: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
-  --glow-strong: 0 0 15px rgba(157, 78, 221, 0.7), 0 0 30px rgba(157, 78, 221, 0.5);
+  --glow-primary: 0 0 10px rgba(0, 204, 204, 0.5), 0 0 20px rgba(0, 204, 204, 0.3);
+  --glow-strong: 0 0 15px rgba(0, 204, 204, 0.7), 0 0 30px rgba(0, 204, 204, 0.5);
   
   /* Fonts */
   --font-heading: 'Orbitron', sans-serif;
@@ -44,9 +44,9 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 30% 20%, rgba(157, 78, 221, 0.05) 0%, transparent 30%),
-    radial-gradient(circle at 70% 60%, rgba(157, 78, 221, 0.03) 0%, transparent 30%),
-    radial-gradient(circle at 50% 90%, rgba(157, 78, 221, 0.05) 0%, transparent 30%);
+    radial-gradient(circle at 30% 20%, rgba(0, 204, 204, 0.05) 0%, transparent 30%),
+    radial-gradient(circle at 70% 60%, rgba(0, 204, 204, 0.03) 0%, transparent 30%),
+    radial-gradient(circle at 50% 90%, rgba(0, 204, 204, 0.05) 0%, transparent 30%);
 }
 
 h1, h2, h3 {
@@ -65,7 +65,7 @@ h1, h2, h3 {
 header {
   height: var(--header-height);
   background: var(--bg-secondary);
-  border-bottom: 1px solid rgba(157, 78, 221, 0.3);
+  border-bottom: 1px solid rgba(0, 204, 204, 0.3);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,7 +159,7 @@ canvas {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(157, 78, 221, 0.2);
+  border: 1px solid rgba(0, 204, 204, 0.2);
 }
 
 /* Buttons */
@@ -201,7 +201,7 @@ canvas {
   background: linear-gradient(
     90deg, 
     transparent, 
-    rgba(157, 78, 221, 0.2), 
+    rgba(0, 204, 204, 0.2), 
     transparent
   );
   transition: 0.5s;
@@ -223,13 +223,13 @@ canvas {
 
 .neon-button.accent {
   border-color: var(--accent-light);
-  box-shadow: 0 0 10px rgba(199, 125, 255, 0.5), 0 0 20px rgba(199, 125, 255, 0.3);
-  background-color: rgba(199, 125, 255, 0.1);
+  box-shadow: 0 0 10px rgba(51, 255, 255, 0.5), 0 0 20px rgba(51, 255, 255, 0.3);
+  background-color: rgba(0, 204, 204, 0.1);
 }
 
 .neon-button.secondary {
   border-color: var(--accent-secondary);
-  box-shadow: 0 0 8px rgba(90, 24, 154, 0.5);
+  box-shadow: 0 0 8px rgba(0, 69, 74, 0.5);
 }
 
 .neon-button.small {
@@ -305,14 +305,14 @@ input:checked + .slider:before {
   border-radius: 10px;
   padding: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(157, 78, 221, 0.2);
+  border: 1px solid rgba(0, 204, 204, 0.2);
   margin-top: 5px;
 }
 
 /* Tabs */
 .data-tabs {
   display: flex;
-  border-bottom: 1px solid rgba(157, 78, 221, 0.2);
+  border-bottom: 1px solid rgba(0, 204, 204, 0.2);
   margin-bottom: 15px;
 }
 
@@ -393,12 +393,12 @@ input:checked + .slider:before {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(157, 78, 221, 0.3);
+  background: rgba(0, 204, 204, 0.3);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(157, 78, 221, 0.5);
+  background: rgba(0, 204, 204, 0.5);
 }
 
 /* Animations */
@@ -408,9 +408,9 @@ input:checked + .slider:before {
 }
 
 @keyframes glow {
-  0% { box-shadow: 0 0 5px rgba(157, 78, 221, 0.5); }
-  50% { box-shadow: 0 0 15px rgba(157, 78, 221, 0.8), 0 0 30px rgba(157, 78, 221, 0.4); }
-  100% { box-shadow: 0 0 5px rgba(157, 78, 221, 0.5); }
+  0% { box-shadow: 0 0 5px rgba(0, 204, 204, 0.5); }
+  50% { box-shadow: 0 0 15px rgba(0, 204, 204, 0.8), 0 0 30px rgba(0, 204, 204, 0.4); }
+  100% { box-shadow: 0 0 5px rgba(0, 204, 204, 0.5); }
 }
 
 /* Responsive Styles */

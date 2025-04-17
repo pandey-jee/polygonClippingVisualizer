@@ -20,15 +20,15 @@ class CanvasManager {
     this.snapToFirstDistance = 20; // Distance to snap to first point to close the polygon
     
     this.colors = {
-      subject: 'rgba(157, 78, 221, 0.7)',      // Main purple
-      clipping: 'rgba(199, 125, 255, 0.7)',    // Lighter purple
-      result: 'rgba(123, 44, 191, 0.9)',       // Darker purple
-      resultStroke: 'rgba(123, 44, 191, 1)',   // Solid purple for stroke
-      resultGlow: 'rgba(157, 78, 221, 1)',     // Glow color
-      background: 'rgba(22, 22, 40, 1)',       // Dark purple background
-      grid: 'rgba(60, 50, 80, 0.2)',           // Subtle grid lines
+      subject: 'rgba(0, 204, 204, 0.7)',      // Main teal
+      clipping: 'rgba(51, 255, 255, 0.7)',    // Lighter teal
+      result: 'rgba(0, 139, 139, 0.9)',       // Darker teal
+      resultStroke: 'rgba(0, 139, 139, 1)',   // Solid teal for stroke
+      resultGlow: 'rgba(0, 204, 204, 1)',     // Glow color
+      background: 'rgba(10, 26, 31, 1)',      // Dark teal background
+      grid: 'rgba(0, 69, 74, 0.2)',           // Subtle grid lines
       pointHighlight: 'rgba(255, 255, 255, 0.9)',
-      edgeHighlight: 'rgba(204, 51, 255, 0.9)'  // Bright purple for edge highlight
+      edgeHighlight: 'rgba(0, 255, 255, 0.9)'  // Bright teal for edge highlight
     };
     
     this.resize();
