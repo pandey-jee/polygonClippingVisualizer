@@ -16,13 +16,12 @@
         <!-- Header with title -->
         <header>
             <h1>Polygon Clipping Visualization</h1>
-            <div class="subtitle">Sutherland-Hodgman Algorithm</div>
         </header>
         
-        <!-- Main content with split layout -->
+        <!-- Main content -->
         <main>
-            <!-- Canvas section with glow effect -->
-            <section class="canvas-section">
+            <div class="canvas-and-controls">
+                <!-- Canvas with glow effect -->
                 <div class="canvas-container">
                     <canvas id="clipCanvas"></canvas>
                     <div class="canvas-overlay">
@@ -31,73 +30,55 @@
                         </div>
                     </div>
                 </div>
-            </section>
-            
-            <!-- Control panel section -->
-            <section class="control-section">
+                
+                <!-- Controls directly under canvas -->
                 <div class="control-panel">
-                    <div class="panel-section">
-                        <h2>Controls</h2>
-                        <div class="button-group">
-                            <button id="drawSubject" class="neon-button cyan">Draw Subject Polygon</button>
-                            <button id="drawClipping" class="neon-button yellow">Draw Clipping Polygon</button>
-                            <button id="runClipping" class="neon-button green" disabled>Run Clipping</button>
-                            <button id="resetCanvas" class="neon-button red">Reset</button>
-                        </div>
-                        <div class="toggle-container">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="stepByStep">
-                                <span class="slider"></span>
-                            </label>
-                            <span class="toggle-label">Step-by-Step Mode</span>
-                        </div>
-                        <button id="nextStep" class="neon-button blue" disabled>Next Step</button>
+                    <div class="button-group">
+                        <button id="drawSubject" class="neon-button primary">Draw Subject</button>
+                        <button id="drawClipping" class="neon-button primary">Draw Clipping</button>
+                        <button id="runClipping" class="neon-button accent" disabled>Run Clipping</button>
+                        <button id="resetCanvas" class="neon-button secondary">Reset</button>
                     </div>
-                    
-                    <div class="panel-section">
-                        <h2>Polygon Data</h2>
-                        <div class="data-tabs">
-                            <div class="tab active" data-tab="subject">Subject</div>
-                            <div class="tab" data-tab="clipping">Clipping</div>
-                            <div class="tab" data-tab="result">Result</div>
-                        </div>
-                        
-                        <div class="data-content">
-                            <div class="data-panel active" id="subject-data">
-                                <h3>Subject Polygon <span class="color-indicator cyan"></span></h3>
-                                <div class="coordinates-list" id="subject-coordinates">
-                                    <p class="empty-state">Draw a subject polygon to see coordinates</p>
-                                </div>
-                            </div>
-                            
-                            <div class="data-panel" id="clipping-data">
-                                <h3>Clipping Polygon <span class="color-indicator yellow"></span></h3>
-                                <div class="coordinates-list" id="clipping-coordinates">
-                                    <p class="empty-state">Draw a clipping polygon to see coordinates</p>
-                                </div>
-                            </div>
-                            
-                            <div class="data-panel" id="result-data">
-                                <h3>Result Polygon <span class="color-indicator green"></span></h3>
-                                <div class="coordinates-list" id="result-coordinates">
-                                    <p class="empty-state">Run clipping to see result coordinates</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="panel-section algorithm-info">
-                        <h2>Sutherland-Hodgman Algorithm</h2>
-                        <p>This visualization demonstrates the Sutherland-Hodgman polygon clipping algorithm, which clips a subject polygon against a convex clipping polygon.</p>
-                        <p>Each edge of the clipping polygon is processed in sequence, determining which vertices of the subject polygon should be kept or discarded.</p>
+                    <div class="toggle-container">
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="stepByStep">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="toggle-label">Step-by-Step</span>
+                        <button id="nextStep" class="neon-button primary small" disabled>Next Step</button>
                     </div>
                 </div>
-            </section>
+                
+                <!-- Data section -->
+                <div class="data-section">
+                    <div class="data-tabs">
+                        <div class="tab active" data-tab="subject">Subject</div>
+                        <div class="tab" data-tab="clipping">Clipping</div>
+                        <div class="tab" data-tab="result">Result</div>
+                    </div>
+                    
+                    <div class="data-content">
+                        <div class="data-panel active" id="subject-data">
+                            <div class="coordinates-list" id="subject-coordinates">
+                                <p class="empty-state">Draw a subject polygon</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-panel" id="clipping-data">
+                            <div class="coordinates-list" id="clipping-coordinates">
+                                <p class="empty-state">Draw a clipping polygon</p>
+                            </div>
+                        </div>
+                        
+                        <div class="data-panel" id="result-data">
+                            <div class="coordinates-list" id="result-coordinates">
+                                <p class="empty-state">Run clipping to see result</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
-        
-        <footer>
-            <p>Interactive Polygon Clipping Visualization Tool</p>
-        </footer>
     </div>
     
     <!-- JavaScript files -->

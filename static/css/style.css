@@ -1,32 +1,33 @@
 /* Base Styles and Variables */
 :root {
-  /* Colors */
-  --bg-primary: #0a0e17;
-  --bg-secondary: #121824;
-  --bg-tertiary: #1a2233;
-  --text-primary: #e6edf3;
-  --text-secondary: #9fb3c8;
-  --accent-cyan: #00ffff;
-  --accent-yellow: #ffff00;
-  --accent-green: #00ff7f;
-  --accent-red: #ff3366;
-  --accent-blue: #4169e1;
+  /* Unified Color Theme - Purple Glow */
+  --bg-primary: #0e0e18;
+  --bg-secondary: #161628;
+  --bg-tertiary: #1f1f36;
+  --text-primary: #f0f0ff;
+  --text-secondary: #a0a0cc;
   
-  /* Shadows and Glows */
-  --glow-cyan: 0 0 10px rgba(0, 255, 255, 0.7), 0 0 20px rgba(0, 255, 255, 0.5);
-  --glow-yellow: 0 0 10px rgba(255, 255, 0, 0.7), 0 0 20px rgba(255, 255, 0, 0.5);
-  --glow-green: 0 0 10px rgba(0, 255, 127, 0.7), 0 0 20px rgba(0, 255, 127, 0.5);
-  --glow-red: 0 0 10px rgba(255, 51, 102, 0.7), 0 0 20px rgba(255, 51, 102, 0.5);
-  --glow-blue: 0 0 10px rgba(65, 105, 225, 0.7), 0 0 20px rgba(65, 105, 225, 0.5);
+  /* Single accent color with variations */
+  --accent-primary: #9d4edd; /* Main purple */
+  --accent-light: #c77dff;   /* Lighter purple */
+  --accent-dark: #7b2cbf;    /* Darker purple */
+  --accent-secondary: #5a189a; /* Very dark purple */
+  
+  /* Polygon colors - all purple shades */
+  --color-subject: #9d4edd;    /* Main purple */
+  --color-clipping: #c77dff;   /* Lighter purple */
+  --color-result: #7b2cbf;     /* Darker purple */
+  
+  /* Glow Effects */
+  --glow-primary: 0 0 10px rgba(157, 78, 221, 0.5), 0 0 20px rgba(157, 78, 221, 0.3);
+  --glow-strong: 0 0 15px rgba(157, 78, 221, 0.7), 0 0 30px rgba(157, 78, 221, 0.5);
   
   /* Fonts */
   --font-heading: 'Orbitron', sans-serif;
   --font-body: 'Roboto Mono', monospace;
   
   /* Sizes */
-  --header-height: 80px;
-  --footer-height: 40px;
-  --sidebar-width: 380px;
+  --header-height: 60px;
 }
 
 /* Reset and Global Styles */
