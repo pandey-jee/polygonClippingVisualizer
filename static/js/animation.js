@@ -82,11 +82,34 @@ class AnimationController {
         // Show final result
         const resultPolygon = this.clipper.getStep(totalSteps - 1).outputPolygon;
         this.canvasManager.setResultPolygon(resultPolygon);
-        this.updateStepIndicator('Clipping complete! Result polygon displayed');
+        this.updateStepIndicator('Clipping complete! Final result polygon displayed');
         
         // Add a small delay and then highlight the result again
         setTimeout(() => {
+          // Show a more dramatic final result
           this.canvasManager.drawHighlightedResult();
+          
+          // Create a flash effect to draw attention to the result
+          const flashEffect = () => {
+            // Flash outline
+            this.canvasManager.ctx.save();
+            this.canvasManager.ctx.lineWidth = 8;
+            this.canvasManager.ctx.strokeStyle = 'white';
+            this.canvasManager.ctx.beginPath();
+            this.canvasManager.ctx.moveTo(resultPolygon[0].x, resultPolygon[0].y);
+            for (let i = 1; i < resultPolygon.length; i++) {
+              this.canvasManager.ctx.lineTo(resultPolygon[i].x, resultPolygon[i].y);
+            }
+            this.canvasManager.ctx.closePath();
+            this.canvasManager.ctx.stroke();
+            this.canvasManager.ctx.restore();
+          };
+          
+          // Flash twice
+          flashEffect();
+          setTimeout(() => {
+            this.canvasManager.drawHighlightedResult();
+          }, 300);
         }, 500);
       }
     });
@@ -152,12 +175,35 @@ class AnimationController {
       // End of steps reached
       const resultPolygon = this.clipper.getStep(this.clipper.getTotalSteps() - 1).outputPolygon;
       this.canvasManager.setResultPolygon(resultPolygon);
-      this.updateStepIndicator('Clipping complete! Result polygon displayed');
+      this.updateStepIndicator('Clipping complete! Final result polygon displayed');
       document.getElementById('nextStep').disabled = true;
       
       // Highlight the result with a small delay
       setTimeout(() => {
+        // Show a more dramatic final result
         this.canvasManager.drawHighlightedResult();
+        
+        // Create a flash effect to draw attention to the result
+        const flashEffect = () => {
+          // Flash outline
+          this.canvasManager.ctx.save();
+          this.canvasManager.ctx.lineWidth = 8;
+          this.canvasManager.ctx.strokeStyle = 'white';
+          this.canvasManager.ctx.beginPath();
+          this.canvasManager.ctx.moveTo(resultPolygon[0].x, resultPolygon[0].y);
+          for (let i = 1; i < resultPolygon.length; i++) {
+            this.canvasManager.ctx.lineTo(resultPolygon[i].x, resultPolygon[i].y);
+          }
+          this.canvasManager.ctx.closePath();
+          this.canvasManager.ctx.stroke();
+          this.canvasManager.ctx.restore();
+        };
+        
+        // Flash twice
+        flashEffect();
+        setTimeout(() => {
+          this.canvasManager.drawHighlightedResult();
+        }, 300);
       }, 500);
       return;
     }

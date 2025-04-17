@@ -522,31 +522,41 @@ class CanvasManager {
    * Draw a highlighted animation for the result polygon
    */
   drawHighlightedResult() {
-    // First do a normal render
-    this.render();
+    // Clear the canvas
+    this.clear();
+    this.drawGrid();
     
     // Ensure we have a result to highlight
     if (!this.resultPolygon || this.resultPolygon.length < 3) return;
     
-    // Create a pulsing animation to highlight the result
-    const pulseAnimation = () => {
-      // Highlight just the result with a bright glow
-      this.ctx.save();
-      this.ctx.shadowColor = this.colors.result;
-      this.ctx.shadowBlur = 15;
-      this.drawPolygon(this.resultPolygon, this.colors.result, true, 3);
-      
-      // Draw points with larger radius
-      this.resultPolygon.forEach(point => {
-        this.drawPoint(point, this.colors.result, 7);
-      });
-      this.ctx.restore();
-    };
+    // Draw original polygons with reduced opacity
+    this.ctx.globalAlpha = 0.3;
+    if (this.subjectPolygon.length > 2) {
+      this.drawPolygon(this.subjectPolygon, this.colors.subject, true, 1);
+    }
+    if (this.clippingPolygon.length > 2) {
+      this.drawPolygon(this.clippingPolygon, this.colors.clipping, true, 1);
+    }
+    this.ctx.globalAlpha = 1.0;
     
-    // Pulse the result a few times to make it stand out
-    pulseAnimation();
+    // Draw the result with enhanced appearance
+    this.ctx.save();
+    // Create a strong glow effect
+    this.ctx.shadowColor = this.colors.resultGlow;
+    this.ctx.shadowBlur = 20;
+    this.ctx.shadowOffsetX = 0;
+    this.ctx.shadowOffsetY = 0;
     
-    // Add a text label showing "RESULT"
+    // Draw a filled result polygon with thick border
+    this.drawPolygon(this.resultPolygon, this.colors.result, true, 4);
+    
+    // Draw result points with larger radius for emphasis
+    this.resultPolygon.forEach(point => {
+      this.drawPoint(point, this.colors.resultStroke, 8);
+    });
+    this.ctx.restore();
+    
+    // Add a prominent "FINAL RESULT" text label
     if (this.resultPolygon.length > 0) {
       // Calculate center of result polygon
       let centerX = 0, centerY = 0;
@@ -557,12 +567,18 @@ class CanvasManager {
       centerX /= this.resultPolygon.length;
       centerY /= this.resultPolygon.length;
       
-      // Draw label
-      this.ctx.font = 'bold 16px Arial';
-      this.ctx.fillStyle = this.colors.result;
+      // Draw text shadow for better visibility
+      this.ctx.font = 'bold 20px Arial';
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
-      this.ctx.fillText('RESULT', centerX, centerY);
+      
+      // Draw shadow first
+      this.ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+      this.ctx.fillText('FINAL RESULT', centerX + 2, centerY + 2);
+      
+      // Draw main text
+      this.ctx.fillStyle = '#FFFFFF';
+      this.ctx.fillText('FINAL RESULT', centerX, centerY);
     }
   }
 }
