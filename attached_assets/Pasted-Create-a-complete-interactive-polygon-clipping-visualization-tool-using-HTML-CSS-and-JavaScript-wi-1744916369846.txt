@@ -1,0 +1,112 @@
+Create a complete interactive polygon clipping visualization tool using HTML, CSS, and JavaScript with the following detailed features:
+
+🌐 Project Overview:
+A web-based application that demonstrates how polygon clipping works step-by-step.
+
+Use GSAP animations to visually enhance the clipping process.
+
+UI should follow a futuristic tech theme (neon glows, dark UI, digital fonts).
+
+Built with HTML (structure), CSS (styling), JavaScript (logic and animation).
+
+Modularized code: use separate files for HTML, CSS, and JS.
+
+🎯 Functionality Requirements:
+Canvas Drawing:
+
+Left side of the screen displays a <canvas> element.
+
+Users see two polygons:
+
+Subject Polygon (cyan): the shape to be clipped.
+
+Clipping Polygon (yellow): the window or boundary.
+
+Result Polygon (red or glowing green): the clipped output.
+
+Animated Clipping:
+
+Use Sutherland–Hodgman algorithm to clip the polygon.
+
+Show step-by-step animation using GSAP as:
+
+Draw each clipping edge.
+
+Highlight intersections.
+
+Animate line segments being trimmed.
+
+Gradual filling of the final clipped polygon.
+
+Add labels or indicators for each step using fade-in/fade-out animations.
+
+Techy Theme & UI:
+
+Layout has a split-screen:
+
+Left: Canvas for drawing and animation.
+
+Right Sidebar:
+
+Buttons: Draw Polygons, Clip Polygon, Reset.
+
+Lists showing coordinates for:
+
+Subject polygon
+
+Clipping polygon
+
+Result polygon
+
+Neon-glow styled UI:
+
+Background: dark or gradient black/blue
+
+Fonts: futuristic like "Orbitron" or "Roboto Mono"
+
+Button glows, animated canvas border
+
+Responsiveness:
+
+Works on different screen sizes.
+
+Scales canvas and sidebar content accordingly.
+
+🛠️ Technologies to Use:
+HTML5 for canvas structure.
+
+CSS3 for styling with custom scrollbars, shadows, gradients, and animations.
+
+JavaScript (vanilla) for polygon logic and interaction.
+
+GSAP for animations and transitions.
+
+📦 Output Expected:
+index.html: Contains the base structure (canvas and sidebar).
+
+style.css: The complete styled layout with techy effects and responsiveness.
+
+script.js: Polygon drawing, clipping logic (Sutherland–Hodgman), GSAP animations.
+
+🖼️ Animation Steps to Show:
+Draw both polygons.
+
+One-by-one highlight each clipping edge.
+
+Show intersections and removed segments with fading/erasing effect.
+
+Fill final polygon with animated stroke and fill using GSAP.
+
+Display coordinates of resulting polygon in the sidebar.
+
+🔥 Bonus Suggestions:
+Add a glowing digital frame to the canvas.
+
+Add sound effects or a futuristic background score (optional).
+
+Use particles or motion trails when clipping occurs (optional).
+
+Add "Step by Step Mode" toggle to manually go through the clipping stages.
+
+🧠 Note to AI: Ensure the final code runs smoothly in the browser, is optimized, and well-commented. Keep the experience clean and intuitive, while visually engaging and educational.
+
