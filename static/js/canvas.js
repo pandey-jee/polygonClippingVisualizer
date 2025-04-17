@@ -120,6 +120,7 @@ class CanvasManager {
       return;
     }
     
+    const completedPolygonType = this.selectedPolygon; // Store which polygon we just completed
     this.isDrawing = false;
     this.selectedPolygon = null;
     
@@ -127,6 +128,17 @@ class CanvasManager {
     if (this.subjectPolygon.length >= 3 && this.clippingPolygon.length >= 3) {
       document.getElementById('runClipping').disabled = false;
     }
+    
+    // Update button state back to ready state
+    // Dispatch a custom event that script.js can listen for
+    const event = new CustomEvent('polygonCompleted', { 
+      detail: { 
+        polygonType: completedPolygonType,
+        subjectComplete: this.subjectPolygon.length >= 3,
+        clippingComplete: this.clippingPolygon.length >= 3
+      } 
+    });
+    document.dispatchEvent(event);
     
     this.updateCoordinateDisplay();
     this.render();

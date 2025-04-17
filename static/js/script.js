@@ -83,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
    * @param {String} state - The current app state
    */
   function updateButtonState(state) {
+    console.log(`Updating button state to: ${state}`);
     switch(state) {
       case 'default':
         drawSubjectBtn.disabled = false;
@@ -105,6 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
         nextStepBtn.disabled = true;
         break;
         
+      case 'ready':
+        drawSubjectBtn.disabled = false;
+        drawClippingBtn.disabled = false;
+        runClippingBtn.disabled = canvasManager.subjectPolygon.length < 3 || canvasManager.clippingPolygon.length < 3;
+        nextStepBtn.disabled = true;
+        break;
+        
       case 'running':
         drawSubjectBtn.disabled = true;
         drawClippingBtn.disabled = true;
@@ -112,13 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!stepByStepToggle.checked) {
           nextStepBtn.disabled = true;
         }
-        break;
-        
-      case 'ready':
-        drawSubjectBtn.disabled = false;
-        drawClippingBtn.disabled = false;
-        runClippingBtn.disabled = false;
-        nextStepBtn.disabled = true;
         break;
     }
   }
@@ -191,4 +192,11 @@ document.addEventListener('DOMContentLoaded', () => {
     drawSubjectBtn.disabled = false;
     drawClippingBtn.disabled = false;
   }, 1000);
+  
+  // Add event listener for polygon completion
+  document.addEventListener('polygonCompleted', (event) => {
+    console.log('Polygon completed event received:', event.detail);
+    // Set the button state to ready after polygon completion
+    updateButtonState('ready');
+  });
 });
